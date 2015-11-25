@@ -9,3 +9,5 @@
  setcookie("login","",time()-1, "/");
  setcookie("pass","",time()-1, "/");    
  print "<br>cookies de usuario borradas";
+ ?>
+ <a href=../index.php>Pulsa para volver a la pagina principal</a>
