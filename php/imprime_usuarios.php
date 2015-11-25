@@ -8,34 +8,36 @@
 
 <body>
 <?php
-include_once 'util.php';
-$db_noticias=  conecta_bd("localhost", "noticias", "root", "");
-
-$consulta_usuarios="SELECT `usuarios`.`login`,
-    `usuarios`.`login`,
-    `usuarios`.`nombre`,
-    `usuarios`.`apellidos`,
-    `usuarios`.`email`,
-    `usuarios`.`Rol`
-FROM `noticias`.`usuarios`;";
+    include_once 'util.php';
+    $db_noticias=  conecta_bd("localhost", "noticias", "root", "");
 
 
+    $campos=averigua_campos_tabla($db_noticias, "noticias.usuarios");
 
-$resultado =$db_noticias->query($consulta_usuarios);
+    $consulta_usuarios="SELECT login,
+        nombre,
+        apellidos,
+        'e-mail',
+        rol_nombre
+    FROM noticias.usuarios;";
 
-if($resultado) 
-{
-    $row = $resultado->fetch();
-    while ($row != null) 
+
+
+    $resultado =$db_noticias->query($consulta_usuarios);
+
+    print "<br>".$campos."<br>";
+    if($resultado) 
     {
-        print  "${row['login']},${row['nombre']},${row['apellidos']},${row['email']},${row['Rol']}<br>";       
-       
-       $row = $resultado->fetch();
+        $row = $resultado->fetch();
+        while ($row != null) 
+        {
+            print  "${row['login']},${row['nombre']},${row['apellidos']},${row['e-mail']},${row['rol_nombre']}<br>";       
+
+           $row = $resultado->fetch();
+        }
     }
-}
 
-
- cierra_db($db_noticias);
+     cierra_db($db_noticias);
 
 ?>
 </body>
