@@ -82,6 +82,37 @@ function conecta_bd($bd_url,$bd_esquema,$bd_user,$bd_pass)
         }
     }
     
+   /**
+    * Esta función devuelve los campos de una tabla separados por '|'
+    * Se supone que ya estas conectado a la BD
+    * @param type $db    |  conexión a una BD
+    * @param type $tabla |  tabla a la que se desea consultar
+    * @return type       |  cadena con la lista de campos
+    */
+    function averigua_campos_tabla($db,$tabla)
+    {       
+       try
+       {
+                
+                $consulta="describe ".$tabla.";";
+                $result = $db->query($consulta);
+                $cad="";
+                foreach($result as $i)
+                {
+                    print $i['Field'];
+                    $cad=$cad.$i['Field'].'|';
+                }                
+                return($cad); 
+                $db=null;
+       }
+       catch (Exception $e) 
+       {
+              echo 'Excepción capturada: ', $e->getMessage(), "\n";
+              $db = null;
+              return($e->getMessage());
+       }
+    }
+    
 //    class Utils
 //{
 //    
