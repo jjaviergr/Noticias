@@ -99,7 +99,7 @@ function conecta_bd($bd_url,$bd_esquema,$bd_user,$bd_pass)
                 $cad="";
                 foreach($result as $i)
                 {
-                    print $i['Field'];
+//                    print $i['Field'];
                     $cad=$cad.$i['Field'].'|';
                 }                
                 return($cad); 
