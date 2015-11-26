@@ -55,13 +55,12 @@
 
         $db_noticias = conecta_bd("localhost", "noticias", "root", "");
 
-        $consulta_usuarios = "SELECT `usuarios`.`login`,
-            `usuarios`.`login`,
-            `usuarios`.`nombre`,
-            `usuarios`.`apellidos`,
-            `usuarios`.`email`,
-            `usuarios`.`Rol`
-        FROM `noticias`.`usuarios`;";
+        $consulta_usuarios = "SELECT login,
+                                nombre,
+                                apellidos,
+                                'e-mail',
+                                rol_nombre
+                            FROM noticias.usuarios;";
 
 
 
@@ -77,7 +76,7 @@
         ?>
                         <option class="ui-widget-content">
                         <?php
-                        print "${row['login']},${row['nombre']},${row['apellidos']},${row['email']},${row['Rol']}<br>";
+                        print "${row['login']},${row['nombre']},${row['apellidos']},${row['e-mail']},${row['rol_nombre']}<br>";
                         ?>
                         </option>
                             <?php
@@ -106,14 +105,22 @@
     { 
          $db_noticias = conecta_bd("localhost", "noticias", "root", "");
 //        print_r($_POST);
-        $consulta_act = "UPDATE usuarios
-                   SET
-                    login = ?,       
-                    nombre = ?,
-                    apellidos = ?,
-                    email = ?,
-                    Rol = ?
-                    WHERE login like ?";
+//        $consulta_act = "UPDATE usuarios
+//                   SET
+//                    login = ?,       
+//                    nombre = ?,
+//                    apellidos = ?,
+//                    email = ?,
+//                    Rol = ?
+//                    WHERE login like ?";
+         $consulta_act="UPDATE `noticias`.`usuarios`
+                    SET
+                    `login` = ?,                    
+                    `nombre` = ?,
+                    `apellidos` = ?,
+                    `e-mail` = ?,
+                    `rol_nombre` = ?
+                    WHERE `login` = ? ;";
 
         $sentencia = $db_noticias->prepare($consulta_act);
         

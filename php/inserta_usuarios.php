@@ -40,15 +40,30 @@ if (isset($_POST['nombre'])&&(isset($_POST['apellidos'])&&(isset($_POST['email']
     
     $db_noticias=  conecta_bd("localhost", "noticias", "root", "");
     //lanzar consulta insercion.
-    $insercion_usuarios="INSERT INTO noticias.usuarios
-        (login,password,nombre,apellidos,email,Rol)
-        VALUES (?,?,?,?,?,?)";
+//    $insercion_usuarios="INSERT INTO noticias.usuarios('login','password','nombre','apellidos','e-mail','rol_nombre')
+//        VALUES (?, ?, ?, ?, ?, ?)";
 //      (:login, :password, :nombre, :apellidos, :e-mail,  :Rol);";
     
-    print_r($_POST);
+    $insercion_usuarios=""
+            ."INSERT INTO `noticias`.`usuarios`
+            (`login`,
+            `password`,
+            `nombre`,
+            `apellidos`,
+            `e-mail`,
+            `rol_nombre`)
+            VALUES
+            (?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?);";
+    
+//    print"<br>";print_r($_POST);print"<br>";
     
     $login=$_POST['login'];
-    $password=$_POST['password'];
+    $password=md5($_POST['password']);
     $nombre=$_POST['nombre'];
     $apellidos=$_POST['apellidos'];
     $email=$_POST['email'];
@@ -66,7 +81,7 @@ if (isset($_POST['nombre'])&&(isset($_POST['apellidos'])&&(isset($_POST['email']
     
     try
     {
-        if ($sentencia->execute()==TRUE)
+        if ($sentencia->execute())
         {
             print "<br>Usuario añadido con exito!!";
   

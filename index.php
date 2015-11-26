@@ -28,13 +28,13 @@
       }      
       else
       {
-          $traza=$traza." Existe una sesion de un NO administrador abierta <br>";
-          header("Location: php/noticias_des.php");     
-      }        
+          $traza=$traza." Existe una sesion de un NO administrador abierta<br>";
+          header("Location: php/noticias_des.php");
+      }
       
   }
   else
-  {   
+  {
       //coger cookies
       //   si hay cookies autenticar
       //                   si autentica y no es administrador ir al header 
@@ -49,7 +49,7 @@
            $traza=$traza." Hay cookies <br>";
            $login=$_COOKIE['login'];
            $pass=$_COOKIE['pass'];
-           print "login cookie es $login   pass cookie es $pass";
+//           print "login cookie es $login   pass cookie es $pass";
             if( autentica($login,$pass))
             {    
                $traza=$traza." Autentica con cookies <br>";
@@ -77,8 +77,10 @@
            logando_sin_cookies();
       }
   }
-//  console.log("$traza");
-  print "$traza";
+  ?>
+  <script>console.log(<?php print "\"$traza\""; ?>);</script>
+  <?php
+//  print "$traza";
    
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
