@@ -56,7 +56,6 @@ CREATE TABLE `noticias` (
   `fecha_inicio` datetime NOT NULL,
   `fecha_fin` datetime NOT NULL,
   `usuarios_login` varchar(45) NOT NULL,
-  `privacidad` enum('publico','privado') NOT NULL,
   `etapas_id` int(11) NOT NULL,
   PRIMARY KEY (`id`,`usuarios_login`,`etapas_id`),
   KEY `usuarios_login` (`usuarios_login`),
