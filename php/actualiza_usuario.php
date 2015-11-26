@@ -3,11 +3,11 @@
     <head>
         <meta charset="utf-8">
         <title>Actualiza usuario</title>
-        <link rel="stylesheet" href="../jquery/jquery-ui-themes-1.11.4/themes/smoothness/jquery-ui.css">
+<!--        <link rel="stylesheet" href="../jquery/jquery-ui-themes-1.11.4/themes/smoothness/jquery-ui.css">
       
         <script src="../jquery/jquery-1.11.3.min.js"></script>
         <script src="../jquery/jquery-ui-1.11.4/jquery-ui.js"></script>
-        <link rel="stylesheet" href="../jquery/jquery-ui-themes-1.11.4/themes/black-tie/theme.css">
+        <link rel="stylesheet" href="../jquery/jquery-ui-themes-1.11.4/themes/black-tie/theme.css">-->
 
         <style>
 /*          #feedback { font-size: 1.4em; }
@@ -15,6 +15,16 @@
           #selectable .ui-selected { background: #F39814; color: white; }
           #selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
           #selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }*/
+        .blanco { color: white; }
+        .destacado { font-size: 2em;margin-left: 35%; margin-bottom: 2%;margin-top: 5%; }
+        .especial  { font-weight: bold; }
+        .contenedor {width: 30%;margin-left: 35%; margin-bottom: 2%;}
+        /*.contenedorS {width: 700px;height: 800px;margin-left:5%;margin-bottom: 5%;margin-top: 5%;}*/
+        .mititulo {font-weight: bold;padding: 0px;margin-left: 0px;}
+        .mititulo2 {font-weight: bold;font-size: 14px;padding: 5px;margin: 0px;}
+        .subcontenedorL {width: 10%;float: left;   }
+        .subcontenedorR {width: 10%;float: right;}
+        input{margin-bottom: 5px;}
         </style>
         <script>        
 //          $(function() {
@@ -69,11 +79,17 @@
         if ($resultado) {
             $row = $resultado->fetch();
             ?>
-            <p>Escoge un usuario para actualizar</p><br>
-                <select multiple onchange="edReg(this.options[this.selectedIndex].text)" id="selectable">
-    <?php
-    while ($row != null) {
-        ?>
+       
+            <div class="destacado">Escoge un usuario para actualizar</div>
+            <div class="contenedor">  
+                
+                
+                    
+                <select multiple onchange="edReg(this.options[this.selectedIndex].text)" id="selectable" >
+                 
+                    <?php
+                    while ($row != null) {
+                        ?>
                         <option class="ui-widget-content">
                         <?php
                         print "${row['login']},${row['nombre']},${row['apellidos']},${row['e-mail']},${row['rol_nombre']}<br>";
@@ -85,20 +101,40 @@
                         cierra_db($db_noticias);
                         ?>
                 </select>
-
-            <form id="fusuario_alterado" action="<?php echo $_SERVER['SCRIPT_NAME'];?>" method="post">            
-            <fieldset>
-                 <legend>Actualiza usuario</legend>
-               <input type="text" id="login" name="login">            
-                <input type="text" id="nombre" name="nombre">
-                <input type="text" id="apellidos" name="apellidos">
-                <input type="text" id="email" name="email">
-                <input type="text" id="rol" name="rol">
-                <input type="submit"  >
-
+                </div>
            
-            </fieldset>
-            </form>
+            <div class="contenedor">  
+                <form id="fusuario_alterado" action="<?php echo $_SERVER['SCRIPT_NAME'];?>" method="post">  
+                    <!--<div class="contenedor">-->
+                <!--<fieldset class="contenedor">-->    
+                    <fieldset class="subcontenedorL">
+
+
+                            <div class="mititulo2"><p>Login</p></div>
+                            <input type="text" id="login" name="login">            
+                            <div class="mititulo2">Nombre</div>
+                            <input type="text" id="nombre" name="nombre">
+                            <div class="mititulo2">Apellidos</div>
+                            <input type="text" id="apellidos" name="apellidos">
+
+<!--                    </fieldset>  
+                    <fieldset class="subcontenedorR">-->
+
+                            <div class="mititulo2">E-Mail</div>
+                            <input type="text" id="email" name="email">
+                            <div class="mititulo2">Rol</div>
+                            <input type="text" id="rol" name="rol">
+                            <input type="submit"  >
+                        
+                    </fieldset>
+                    
+                <!--</fieldset>-->
+                   
+                
+                </form>
+                 </div>
+          <!--</div>-->
+          
     <?php
    
     if (isset($_POST['login']))
