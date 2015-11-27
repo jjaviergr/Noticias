@@ -46,13 +46,11 @@
                 
                 if (usuario_es_administrador($login, $pass)==1)
                 {
-                    print "mal";
-                    //header("Location: php/configuracion_noticias.php");                   
+                    header("Location: php/configuracion_noticias.php");                   
                 }
                else
                {
-                   print "bien";
-                  //header("Location: php/noticias.php");                    
+                  header("Location: php/noticias.php");                    
                }
             }
             else
@@ -78,16 +76,13 @@
                graba_cookies_credenciales($login, $pass, 365*24*60*60);
                graba_session( $login, $pass);
                if (usuario_es_administrador($login, $pass))
-                   {
-                      print "mal";
-                    //header("Location: php/configuracion_noticias.php");                    
-                    //header("Location: php/configuracion_noticias.php");                    
-                   }
-                   else
-                   {
-                      print "bien";
-                  //header("Location: php/noticias.php");                     
-                   }                   
+               {
+                   header("Location: php/configuracion_noticias.php");                    
+               }
+               else
+               {
+                   header("Location: php/noticias.php");                     
+               }
            }
        }
    }
