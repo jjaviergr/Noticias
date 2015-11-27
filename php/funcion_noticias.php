@@ -7,11 +7,12 @@
 */
 
 include 'conectar.php';
-
+session_start();
 try
 {
     conectar();
     visualizar_noticias();
+    print($query);
 }
 catch(Exception $e)
 {
@@ -23,12 +24,10 @@ function consulta()
 {
     try
     {
+        $rol = $_SESSION['rol'];
         $conexion = conectar();
- //       $query = $conexion->prepare("select fecha_fin, titulo, descripcion from noticias, usuarios where fecha_fin like :fecha AND rol_nombre like :rol");
-//    $resultado->execute(Array(':fecha' => datetime(),':comprobar'=>));
-  //  $numero_filas = $resultado->rowCount();
-        $text_query = "select fecha_fin, titulo, descripcion from noticias";
-        $query = $conexion->query($text_query); // Realizamos la consulta y la guardamos en una variable.
+        $consulta = "select fecha_fin, titulo, descripcion from noticias join usuarios on usuarios_login = login where rol_nombre = '".$rol."' ";
+        $query = $conexion->query($consulta);
         return $query;
     }
     catch(Exception $e)
@@ -42,14 +41,21 @@ function visualizar_noticias()
     try
     {
         $consulta = consulta();
-        while($x = $consulta->fetch())
+        if($consulta != null)
         {
-            if($x['fecha_fin'] <= time('Y-m-d'))
+            while($x = $consulta->fetch())
             {
-                print "<header><h1>".$x['titulo']."</h1></header>";
+                if($x['fecha_fin'] <= time('Y-m-d'))
+                {
+                    print "<header><h1>".$x['titulo']."</h1></header>";
+                }
             }
+            $consulta->closeCursor();
         }
-        $consulta->closeCursor();
+        else
+        {
+            print "<header><h1>No hay noticias</h1></header>";
+        }    
     }
     catch(Exception $e)
     {

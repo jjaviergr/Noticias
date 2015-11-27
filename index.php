@@ -34,7 +34,6 @@
         //   si no hay cookies ir a form y autenticar  
         //           si no autentica  mostrar form y mensaje error                       
         //           si autentica grabar cookies, grabar sesion y ir al header o a pagina de administrador
-        print "PASANDO POR EL SESION UNSET";
         session_destroy();
         if (isset($_COOKIE['login']) && isset($_COOKIE['pass']))
         {
