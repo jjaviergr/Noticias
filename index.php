@@ -10,26 +10,23 @@
 <body>
     <?php
     include_once 'php/conectar.php';
-  //  $traza="";
-   
     session_start();
-    if (isset($_SESSION['usuario']) && isset($_SESSION['rol']))
+    if (isset($_SESSION['usuario']))
     {
-        $rol=$_SESSION['rol'];
-        if (strcmp($rol, 'Administrador')==0)
-        {
-       //     $traza=$traza." Existe una sesion de administrador abierta <br>";
-            header("Location: php/pagina_administrador_des.php");   
-        }      
-        else
-        {
-      //      $traza=$traza." Existe una sesion de un NO administrador abierta <br>";
-            header("Location: php/noticias.php");     
-        }        
-        
+        $usuario=$_SESSION['usuario'];
+        switch($usuario){
+            case "profesor":
+                header("Location: php/noticias.php");
+                break;
+            case "usuario":
+                header("Location: php/noticias.php");
+                break;
+            default:
+                header("Location: php/configuracion_noticias.php");
+        }
     }
     else
-    {   
+    {
         //coger cookies
         //   si hay cookies autenticar
         //                   si autentica y no es administrador ir al header 
@@ -37,33 +34,29 @@
         //   si no hay cookies ir a form y autenticar  
         //           si no autentica  mostrar form y mensaje error                       
         //           si autentica grabar cookies, grabar sesion y ir al header o a pagina de administrador
-        session_unset();
-    //    $traza=$traza." No hay sesiones abiertas <br>";     
+        print "PASANDO POR EL SESION UNSET";
+        session_destroy();
         if (isset($_COOKIE['login']) && isset($_COOKIE['pass']))
         {
-        //    $traza=$traza." Hay cookies <br>";
             $login=$_COOKIE['login'];
             $pass=$_COOKIE['pass'];
-            //print "login cookie es $login   pass cookie es $pass";
             if( autentica($login,$pass))
             {    
-           //     $traza=$traza." Autentica con cookies <br>";
                 graba_session($login, $pass); 
                 
                 if (usuario_es_administrador($login, $pass)==1)
                 {
-             //       $traza=$traza." Es administrador <br>";
-                    header("Location: php/pagina_administrador_des.php");                    
+                    print "mal";
+                    //header("Location: php/configuracion_noticias.php");                   
                 }
                else
                {
-        //          $traza=$traza." No es administrador <br>";
-                  header("Location: php/noticias.php");                    
+                   print "bien";
+                  //header("Location: php/noticias.php");                    
                }
             }
             else
             {
-       //             $traza=$traza." No autentica contra la BD  <br>";
                     muestra_formulario();
             }
       }
@@ -72,45 +65,31 @@
            logando_sin_cookies();
       }
   }
-//  console.log("$traza");
-  //print "$traza";
-    
+
    function logando_sin_cookies()
    {
- //      global $traza;
-       
        muestra_formulario();
        if (isset($_POST['login']) && isset($_POST['pass']))
        {
-    //       $traza=$traza." Ha rellenado el form  <br>";
            $login=$_POST['login'];
            $pass=md5($_POST['pass']);
            if (autentica($login,$pass))
            {
-          //     $traza=$traza." Autentica desde form y graba sesion y cookies  <br>";
                graba_cookies_credenciales($login, $pass, 365*24*60*60);
                graba_session( $login, $pass);
                if (usuario_es_administrador($login, $pass))
                    {
-           //           $traza=$traza." Es un administrador  <br>";
-                      header("Location: php/pagina_administrador_des.php");                    
+                      print "mal";
+                    //header("Location: php/configuracion_noticias.php");                    
+                    //header("Location: php/configuracion_noticias.php");                    
                    }
                    else
                    {
-           //           $traza=$traza." Es un no administrador  <br>";
-                      header("Location: php/noticias.php");                    
+                      print "bien";
+                  //header("Location: php/noticias.php");                     
                    }                   
            }
-           else
-           {
-           //         $traza=$traza." Fallo con formulario y no tiene cookies  <br>";                   
-           }
        }
-       else
-       {
-          // $traza=$traza." No ha rellenado el form  <br>";
-           
-       } 
    }
    
    /**
