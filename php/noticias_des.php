@@ -11,18 +11,24 @@ and open the template in the editor.
     </head>
     <body>
         <?php
+         include_once 'util.php';
+         
+        print "pagina de noticias en desarrollo <br>";
         
-        print "pagina de noticias en desarrollo ";
-       session_start();
        
-        if (isset($_SESSION['usuario']) && isset($_SESSION['rol']))
-        {
-        print "<br>Existe una sesion abierta<br>";
-        }
-        ?>
-       <button onclick=" <?php session_unset(); ?> "> Pulsa para cerrar sesion</button>
-       <a href=borra_cookies.php>Pulsa para borrar cookies</a>
-       <a href=../index.php>Pulsa para volver a la pagina principal</a>
+
+        
+        print "Sesion :" . hay_sesion();?>
+        
+        <a href='cierra_sesion.php'>Pulsa para cerrar sesion</a>
+
+      
+   
+       <?php print "cookies :" . hay_cookies(); ?>
+
+        <a href='borra_cookies.php'> Pulsa para borrar cookies</a>
+        
+        <a href=../index.php>Pulsa para volver a la pagina principal</a>
        
         
     </body>
