@@ -113,6 +113,38 @@ function conecta_bd($bd_url,$bd_esquema,$bd_user,$bd_pass)
        }
     }
     
+    function borra_cookies()
+    {
+        setcookie("login","",time()-1, "/");
+        setcookie("pass","",time()-1, "/");   
+    }
+    
+    function hay_cookies()
+    {
+      
+        if (isset($_COOKIE['login']))
+        {
+            return "si";
+        }
+        else
+        {
+            return "no";
+        }
+    }
+    
+    function hay_sesion()
+    {
+        session_start();
+        if (isset($_SESSION['login']))
+        {
+            return "si";
+        }
+        else
+        {
+            return "no";
+        }
+    }
+    
 //    class Utils
 //{
 //    

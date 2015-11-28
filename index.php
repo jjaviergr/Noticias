@@ -18,20 +18,32 @@
    $traza="";
    
   session_start();
-  if (isset($_SESSION['usuario']) && isset($_SESSION['rol']))
+  
+  if (isset($_SESSION['login']) && isset($_SESSION['rol']))
+//  if (isset($_SESSION))
   {
       $rol=$_SESSION['rol'];
+      $destino="";
       if (strcmp($rol, 'Administrador')==0)
       {
           $traza=$traza." Existe una sesion de administrador abierta <br>";
-          header("Location: php/pagina_administrador_des.php");   
+                  
+          $destino="Location: php/pagina_administrador_des.php";
+          $traza=$traza.$location."<br>";
       }      
       else
       {
           $traza=$traza." Existe una sesion de un NO administrador abierta<br>";
-          header("Location: php/noticias_des.php");
+          $destino="Location: php/noticias_des.php";
+          $traza=$traza.$location."<br>";
+          
       }
       
+      ?>
+    
+      <script>console.log(" <?php print $traza;  ?> ");</script>
+      <?php
+      header($destino);   
   }
   else
   {
@@ -42,7 +54,7 @@
       //   si no hay cookies ir a form y autenticar  
       //           si no autentica  mostrar form y mensaje error                       
       //           si autentica grabar cookies, grabar sesion y ir al header o a pagina de administrador
-      session_unset();
+  
       $traza=$traza." No hay sesiones abiertas <br>";     
       if (isset($_COOKIE['login']) && isset($_COOKIE['pass']))
       {
@@ -78,9 +90,10 @@
       }
   }
   ?>
-  <script>console.log(<?php print "\"$traza\""; ?>);</script>
+   <!--print "$traza"; ?>-->
+   <script>console.log(" <?php print $traza;  ?> ");</script>
   <?php
-//  print "$traza";
+print "$traza";
    
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -139,8 +152,8 @@
    function graba_session($login,$pass)
    {              
         $rol_recuperado= determina_rol($login,$pass);
-        session_start();
-        $_SESSION['usuario']=$login;
+//        session_start();
+        $_SESSION['login']=$login;
         $_SESSION['rol']=$rol_recuperado;
    }
     
