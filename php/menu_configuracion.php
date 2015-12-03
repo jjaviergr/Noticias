@@ -84,7 +84,7 @@
                     <div class="pager">
                         <span class="pagedisplay"></span>
                         <span class="plus"></span>
-                        <button type="button" name="añadir" title="Añadir" class="activator pull-right btn btn-success btn-sm"><span class="glyphicon glyphicon-plus" aria-hidden="true"> Añadir</span></button>
+                        <button type="button" name="añadir" title="Añadir" id="activator" class="pull-right btn btn-success btn-sm"><span class="glyphicon glyphicon-plus" aria-hidden="true"> Añadir</span></button>
                         <br>
                         <br>
                     </div>
@@ -156,9 +156,10 @@
                 </article>
             </section>
         </div>
-        <div id="ids">
+       </div>
+<!--        <div id="ids">
 
-        </div>
+        </div>-->
         <script>
             function editar(id) {
                 $.ajax({
@@ -168,19 +169,18 @@
                     success: function () {
                     }
                 }).done(function (result) {
-                    var titulo = $("#a").html();
-//                    alert(titulo);
-                    $("#ids").html(result);
-//                    $("#id").attr("value",result);
-//                    $("#titulo").attr("value", result);
-                    $("#cuerpo").val(result);
-//                    $("#fecha_inicio").attr("value", data.fecha_inicio);
-//                    $("#fecha_fin").attr("value", data.fecha_fin);
-//                    $("#id").html(result.titule);
-                      //split() para separar str y remplace para las fechas
+                    var resultado = result.split("~");
+                    $("#titulo").attr("value", resultado[0]);
+                    $("#cuerpo").val(resultado[1]);
+                    var fechainicio = resultado[2].replace(" ", "T");
+                    $("#fecha_inicio").attr("value", fechainicio);
+                    var fechafin = resultado[3].replace(" ", "T");
+                    $("#fecha_fin").attr("value", fechafin);
+                    $("#id").attr("value", resultado[4]);
+//                    $("#ids").html(fechainicio);
+
+                    //split() para separar str y remplace para las fechas
                 });
-
-
             }
         </script>
     </body>
