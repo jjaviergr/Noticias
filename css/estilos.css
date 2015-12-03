@@ -1,3 +1,4 @@
+
 div.sesion {
     border-top-left-radius: 5px 5px;
     border-top-right-radius: 5px 5px;
@@ -11,98 +12,6 @@ div.sesion {
     ;
 }
 
-div.noticias {
-    border-top-left-radius: 5px 5px;
-    border-top-right-radius: 70px 70px;
-    border-bottom-left-radius: 70px 70px;
-    border-bottom-right-radius: 5px 5px;
-    box-shadow: 1px 1px 5px 1px;
-    text-align: center;
-    height: 100%;
-    background-color: #EEFFEE;
-    margin-top: 1%;
-    margin-left: 1%;
-    margin-right: 1%;
-    margin-bottom: 1%;
-    padding-top: 3%;
-    padding-left: 3%;
-    padding-right: 3%;
-    padding-bottom: 3%;
-}
-
-div.titulo {
-    border-top-left-radius: 5px 5px;
-    border-top-right-radius: 70px 70px;
-    border-bottom-left-radius: 70px 70px;
-    border-bottom-right-radius: 5px 5px;
-    box-shadow: 1px 3px 5px 1px;
-    margin-bottom: 1%;
-    font-size: 45px;
-    color: #005522;
-    font-family: monospace;
-}
-
-div.listaNoticias{
-    height: 80%;
-}
-img {
-    margin-top: 1%;
-    margin-left: 1%;
-    margin-right: 1%;
-    margin-bottom: 3%;
-    box-shadow: 20px 20px 150px 0.5px;
-    width: 740px;
-    height: 360px;
-}
-
-div.cuerpo {
-    border-top-left-radius: 5px 5px;
-    border-top-right-radius: 5px 5px;
-    border-bottom-left-radius: 5px 5px;
-    border-bottom-right-radius: 5px 5px;
-    box-shadow: 3px 3px 10px 0px;
-    padding-top: 1%;
-    padding-left: 2%;
-    padding-right: 2%;
-    padding-bottom: 1%;
-}
-
-div.autor {
-    text-align: right;
-    font-size: 20px;
-    font-family: cursive;
-}
-
-h2 {
-    padding-top: 5%;
-    color: #005522;
-    font-family: monospace;
-}
-
-input {
-    padding-left: 2%;
-    border-top-left-radius: 5px 5px;
-    border-top-right-radius: 5px 5px;
-    border-bottom-left-radius: 5px 5px;
-    border-bottom-right-radius: 5px 5px;
-    width: 50%;
-    margin-top: 5%
-}
-
-.filas{
-    width: 45px;
-}
-button {
-    border-top-left-radius: 5px 5px;
-    border-top-right-radius: 5px 5px;
-    border-bottom-left-radius: 5px 5px;
-    border-bottom-right-radius: 5px 5px;
-    background-color: #A9A9A9;
-}
-
-span {
-    color: #005522;
-}
 
 p {
     text-align: justify;
@@ -123,14 +32,11 @@ th, td {
     border-radius: 10px 15px;
 }
 .td{
-    
-}
-.color{
-    color: red;
+
 }
 
-.botones{
-    float: right;
+.plus{
+    text-align: left;
 }
 
 /*==================================================
@@ -195,9 +101,4 @@ th, td {
     background: #777;
     box-shadow: 0 15px 10px #777;
     transform: rotate(-3deg);
-}
-
-.tablesorter-filter:last-child{
-    opacity: 0 !important;
-    display: none !important;
 }

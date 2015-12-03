@@ -1,4 +1,3 @@
-/*--Inicio--TABLESORTER*/
 $(function () {
 
     // initialize custom pager script BEFORE initializing tablesorter/tablesorter pager
@@ -40,33 +39,37 @@ $(function () {
                 output: 'mostrar: {startRow} a {endRow} ({filteredRows})'
             });
 
-/*--Fin--TABLESORTER*/
-
-//Funcion que borra lasnoticias
-    $(".delete").click(function () {
-        var del_id = $(this).attr("id");
-        if (confirm("¿Seguro que desea borrar la noticia?"))
-        {
+//Funcion queborra lasnoticias
+    $(".delete").confirm({
+        text: "¿Estas segura de que quieres borar la notiaci?",
+        title: "Confirmation required",
+        confirm: function () {
+            var del_id = $(this).attr("id");
+            console.log(del_id);
             $.ajax({
                 type: "POST",
                 url: "../php/delete.php",
                 data: {info: del_id},
                 success: function () {
                 }
-            }).done(function (result){
-                $("#id").html(result);
             });
             var t = $('table');
             // disabling the pager will restore all table rows
             // t.trigger('disablePager');
             // remove chosen row
-            $(this).closest('tr').remove();
+           $(this).closest('tr').remove();
             // restore pager
             // t.trigger('enablePager');
             t.trigger('update');
-        }
-        return false;
+        },
+        cancel: function () {
+        },
+        confirmButton: "Si, quiero borrar",
+        cancelButton: "No quiero borrar",
+        post: true,
+        confirmButtonClass: "btn-danger",
+        cancelButtonClass: "btn-default",
+        dialogClass: "modal-dialog modal-lg" // Bootstrap classes for large modal
     });
 });
-
 

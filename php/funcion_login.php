@@ -1,6 +1,6 @@
 <?php
 
-include 'conectar.php';
+include 'libreria.php';
 
 function usa_formulario($exiten_cookies)
 {

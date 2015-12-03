@@ -6,19 +6,16 @@
     *En caso de fallo en cualquier momento se desconectará de la base de datos.
 */
 
-include 'conectar.php';
+include 'libreria.php';
 session_start();
 try
 {
-    conectar();
     visualizar_noticias();
-    print($query);
 }
 catch(Exception $e)
 {
     exit();
 }
-
 
 function consulta()
 {
@@ -41,7 +38,7 @@ function visualizar_noticias()
     try
     {
         $consulta = consulta();
-        if($consulta != null)
+        if($consulta->rowCount()!=0)
         {
             while($x = $consulta->fetch())
             {

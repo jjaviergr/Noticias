@@ -4,12 +4,13 @@
 <head lang="es">
     <title>Iniciar Sesion</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href=".//css//estilos.css">
+    <link rel="stylesheet" type="text/css" href=".//css//login.css">
 </head>
 
 <body>
     <?php
-    include_once 'php/conectar.php';
+    include_once 'php/libreria.php';
+    
     session_start();
     if (isset($_SESSION['usuario']))
     {
@@ -22,7 +23,7 @@
                 header("Location: php/noticias.php");
                 break;
             default:
-                header("Location: php/configuracion_noticias.php");
+                header("Location: php/menu_configuracion.php");
         }
     }
     else
@@ -43,13 +44,13 @@
             {    
                 graba_session($login, $pass); 
                 
-                if (usuario_es_administrador($login, $pass)==1)
+                if (usuario_entra_configuracion($login, $pass)==1)
                 {
-                    header("Location: php/configuracion_noticias.php");                   
+                    header("Location: php/menu_configuracion.php");
                 }
                else
                {
-                  header("Location: php/noticias.php");                    
+                  header("Location: php/noticias.php");
                }
             }
             else
@@ -74,13 +75,13 @@
            {
                graba_cookies_credenciales($login, $pass, 365*24*60*60);
                graba_session( $login, $pass);
-               if (usuario_es_administrador($login, $pass))
+               if (usuario_entra_configuracion($login, $pass))
                {
-                   header("Location: php/configuracion_noticias.php");                    
+                   header("Location: php/menu_configuracion.php");
                }
                else
                {
-                   header("Location: php/noticias.php");                     
+                   header("Location: php/noticias.php");
                }
            }
        }
@@ -166,24 +167,21 @@
      * @param type $pass
      * @return boolean
      */
-    function usuario_es_administrador($login,$pass)
-    {        
+    function usuario_entra_configuracion($login,$pass)
+    {
         $dwes=conectar();
-        $consulta="SELECT * FROM noticias.usuarios 
-                   where rol_nombre like 'Administrador' and login like ?";
-        $resultado = $dwes->prepare($consulta);  
-//         print $login;
+        $rol = $_SESSION['rol'];
+        $consulta="SELECT * FROM usuarios 
+        where login like ? and login not like 'usuario' and login not like 'profesor'";
+        $resultado = $dwes->prepare($consulta);
         $resultado->bindParam(1, $login);
-        
         $resultado->execute();
-      
-        if ($resultado->rowCount( )>0) {
-        return 1;
-    } else {
-        return 0;
-    }
 
-//        if $resultado->rowCount()
+        if ($resultado->rowCount()>0) {
+            return 1;
+        } else {
+            return 0;
+        }
         cierra_db($dwes);
     }
     
@@ -229,9 +227,8 @@
     
     <div class="sesion effect2" id="color">
         <h2>I.E.S. Aguadulce</h2>
-       <!--<form class="formulario" role="form" action=".//php//login.php" method='post'>-->  
-       <form class="formulario" role="form" action="" method='post' autocomplete="off">
-           <input style="display:none">
+        <form class="formulario" role="form" action="" method='post' autocomplete="off">
+            <input style="display:none">
             <input type="password" style="display:none">
             <div class="usuario">
                 <input type="text" placeholder="E-mail / usuario"  name="login" autocomplete="off" value="">
