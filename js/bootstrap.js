@@ -30,6 +30,23 @@ $(function () {
         });
     });
 });
+$(function () {
+    $('#activator').click(function () {
+        $('#overlay').fadeIn('fast', function () {
+            $('#box').animate({'top': '60px'}, 500);
+            $("#id").attr("value", "0");
+            $("#titulo").attr("value", "");
+            $("#cuerpo").val("");
+            $("#fecha_inicio").attr("value", "");
+            $("#fecha_fin").attr("value", "");
+        });
+    });
+    $('#boxclose').click(function () {
+        $('#box').animate({'top': '-1000px'}, 500, function () {
+            $('#overlay').fadeOut('fast');
+        });
+    });
+});
 /*--Fin--Caja que baja "Edicion Noticias" */
 
 
